@@ -1,0 +1,26 @@
+#video {
+    width: 480px;
+}
+
+#presentation img {
+    width: 480px;
+}
+
+
+#video {
+    float: left;
+    margin-right: 10px;
+}
+
+body {
+    padding-top: 20px;
+    width: 973px;
+    margin: 0 auto;
+    background-color: #aaa;
+}
+
+h1 {
+    text-align: center;
+    font-size: 80%;
+}
+

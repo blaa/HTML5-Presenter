@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>test</title>
+
+    <link rel="stylesheet" href="parts/style.css" />
+    <script type="text/javascript" src="parts/jquery.js"></script>
+    <script type="text/javascript" src="parts/player.js"></script>
+
+
+    <link rel="stylesheet" href="projekktor/style/projekktor_theme_tll/style.css" />
+    <script type="text/javascript">
+      var PROJEKKTOR_CONFIG = {
+      playerFlashMP4: "projekktor/playerMP4.swf",
+      playerFlashMP3: "projekktor/playerMP3.swf"
+      };
+    </script>
+    <script type="text/javascript" src="projekktor/projekktor.js"></script>
+
+
+  </head>
+  <body>
+    <div id="log">
+    </div>
+
+    <div id="intro">
+      <h1>Zajebista prezentacja.</h1>
+    </div>
+
+    <div id="video">
+      <video src="video.ogg" controls="true" autoplay="true" width="480" />
+    </div>
+
+    <div id="presentation">
+      <img src="prs/intro.jpg" alt="presentation" />
+    </div>
+
+    <div class="clear"> </div>
+    <div id="info"></div>
+  </body>
+</html>
