@@ -4,6 +4,7 @@
 
 #presentation img {
     width: 480px;
+    max-height: 300px;
 }
 
 
@@ -24,3 +25,15 @@ h1 {
     font-size: 80%;
 }
 
+
+#TOC {
+    margin-top: 50px;
+}
+
+#TOC li {
+    cursor: pointer;
+}
+
+#TOC li.current {
+    color: red;
+}

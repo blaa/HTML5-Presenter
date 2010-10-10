@@ -1,6 +1,6 @@
 [
-  [2, "page1.jpg"],
-  [4, "page2.jpg"], 
-  [6, "page3.jpg"],
-  [8, "page4.jpg"]
+  [0, ["page1.jpg", "Tytul1"]],
+  [2, ["page2.jpg", "Tytul2"]], 
+  [4, ["page3.jpg", "Tytul3"]],
+  [8, ["page4.jpg", "Tytul4"]]
 ]

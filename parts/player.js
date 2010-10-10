@@ -5,19 +5,43 @@ function log(txt) {
     $('#log').append(txt);
 }
 
+function get_file(idx) {
+    return presData[idx][1][0];
+}
+
+function get_title(idx) {
+    return presData[idx][1][1];
+}
+
+function get_time(idx) {
+    return presData[idx][0];
+}
+
+function get_nice_time(idx) {
+    return presData[idx][0] + '[s]';
+}
+
+function get_src(file) {
+    return 'prs/' + file;
+}
+
 function loadFrame(index) 
 {
     if (currentIndex == index)
         return; /* Nothing to do */
     currentIndex = index;
 
-    var file = 'prs/' + presData[index][1];
+    var file = get_src(get_file(index));
 
     $('#presentation img').attr('src', file);
+    $('#fancybox-outer img').attr('src', file);
 
     var info = $('#info');
 
     info.html('Slide ' + (parseInt(index)+1) + '/' + presData.length);
+
+    $('#TOC li').removeClass('current');
+    $('#TOC li[rel=' + index + ']').addClass('current');
 }
 
 function updatePresentation() {
@@ -38,7 +62,7 @@ function updatePresentation() {
             continue;
         }
 
-        var frameTime = presData[idx][0];
+        var frameTime = get_time(idx);
 
         if (t > frameTime) {
             newFrameIndex = idx;
@@ -52,14 +76,38 @@ function updatePresentation() {
 }
 
 
+function generateTOC() {
+    var container = $('#TOC');
+    for (idx in presData) {
+        var file = get_file(idx);
+        var time = get_time(idx);
+        
+        var li = $('<li/>')
+            .attr('rel', idx)
+            .html(get_title(idx) + ' (' + get_nice_time(idx) + ')');
+
+        container.append(li);
+    }
+}
 
 
 $(document).ready(
     function () {
         function getPresData(data) {
             presData = data;
+            generateTOC();
             loadFrame(0);
         }
+
+        $('#TOC li')
+            .live('click', 
+                  function () {
+                      var idx = $(this).attr('rel');
+                      loadFrame(idx);
+                      var v = $('video');
+                      v[0].currentTime = presData[idx][0];
+                  }
+        );
 
 
         $.ajax({
@@ -72,6 +120,7 @@ $(document).ready(
             } 
         });
 
+        $('#presentation img').fancybox();
 
         $('video').bind('seeked', 
                         function () {
