@@ -14,6 +14,10 @@ function loadFrame(index)
     var file = 'prs/' + presData[index][1];
 
     $('#presentation img').attr('src', file);
+
+    var info = $('#info');
+
+    info.html('Slide ' + (parseInt(index)+1) + '/' + presData.length);
 }
 
 function updatePresentation() {
