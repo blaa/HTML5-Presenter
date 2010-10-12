@@ -1,6 +1,6 @@
 [
-  [0, ["page1.jpg", "Tytul1"]],
-  [2, ["page2.jpg", "Tytul2"]], 
-  [4, ["page3.jpg", "Tytul3"]],
-  [8, ["page4.jpg", "Tytul4"]]
+  ["0",     ["page1.jpg", "Tytul1"]],
+  ["2",     ["page2.jpg", "Tytul2"]], 
+  ["00:04", ["page3.jpg", "Tytul3"]],
+  ["00:08", ["page4.jpg", "Tytul4"]]
 ]

@@ -2,7 +2,7 @@ var presData = null;
 var currentIndex = null;
 
 function log(txt) {
-    $('#log').append(txt);
+    $('#log').append(txt + '<br/>');
 }
 
 function get_file(idx) {
@@ -14,11 +14,20 @@ function get_title(idx) {
 }
 
 function get_time(idx) {
-    return presData[idx][0];
+    var raw = presData[idx][0];
+    if (raw.search(':') == -1)
+        return parseFloat(raw);
+    var spl = raw.split(':');
+    if (spl.length != 2 || parseFloat(spl[1]) > 60)
+        log('Invalid time specification for slide ' + idx);
+
+    var time = parseInt(spl[0]) * 60 + parseFloat(spl[1]);
+
+    return time;
 }
 
 function get_nice_time(idx) {
-    return presData[idx][0] + '[s]';
+    return presData[idx][0] + 's';
 }
 
 function get_src(file) {
@@ -32,9 +41,17 @@ function loadFrame(index)
     currentIndex = index;
 
     var file = get_src(get_file(index));
+    var title = get_title(index);
 
-    $('#presentation img').attr('src', file);
-    $('#fancybox-outer img').attr('src', file);
+    $('#presentation img')
+        .attr('src', file)
+        .attr('alt', title);
+
+    if ($('#fancybox-outer').is(':visible')) {
+        $('#fancybox-outer img').attr('src', file);
+        $('#fancybox-title-main').html(title);
+    }
+
 
     var info = $('#info');
 
@@ -105,7 +122,7 @@ $(document).ready(
                       var idx = $(this).attr('rel');
                       loadFrame(idx);
                       var v = $('video');
-                      v[0].currentTime = presData[idx][0];
+                      v[0].currentTime = get_time(idx);
                   }
         );
 
@@ -115,12 +132,13 @@ $(document).ready(
             dataType: 'json',
             success: getPresData,
             
-            error: function () { 
-                log('Error: Unable to read presentation calibration data (data.json)'); 
+            error: function (ev, status, desc) { 
+                log('Error: Unable to read presentation calibration data (data.json).'); 
+                log('Invalid address or invalid JSON: ' + status + '//' + desc);
             } 
         });
 
-        $('#presentation img').fancybox();
+        $('#presentation img').fancybox({autoScale: true});
 
         $('video').bind('seeked', 
                         function () {

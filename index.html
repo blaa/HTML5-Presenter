@@ -14,12 +14,8 @@
     <script type="text/javascript" src="parts/jquery.js"></script>
     <script type="text/javascript" src="parts/player.js"></script>
 
-
     <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.1.css" />
     <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.1.pack.js"></script>
-
-
-
 
     <link rel="stylesheet" href="projekktor/style/projekktor_theme_tll/style.css" />
     <script type="text/javascript">
@@ -30,28 +26,32 @@
     </script>
     <script type="text/javascript" src="projekktor/projekktor.js"></script>
 
-
   </head>
   <body>
     <div id="log">
+      <span id="nojs">This site requires a Javascript support in your browser.</span>
+      <script>$('#nojs').remove()</script>
     </div>
 
     <div id="intro">
       <h1>Wypasiona prezentacja.</h1>
     </div>
 
-    <div id="video">
-      <video controls="true" autoplay="true" width="480">
-        <source src="intro.ogv" />
-        <source src="intro.mp4" />
-      </video>
+    <div id="main">
+      <div id="video">
+        <video controls="true" autoplay="true" width="480">
+          <source src="intro.ogv" />
+          <!-- <source src="intro.mp4" /> -->
+        </video>
+      </div>
+
+      <div id="presentation">
+        <img src="prs/page1.jpg" alt="presentation" />
+      </div>
+      <div class="clear"> </div>
     </div>
 
-    <div id="presentation">
-      <img src="prs/page1.jpg" alt="presentation" />
-    </div>
 
-    <div class="clear"> </div>
     <div id="info"></div>
 
     <div>
@@ -59,9 +59,10 @@
       </ul>
     </div>
 
-    <div>CHANGELOG:
+    <div id="changelog">CHANGELOG:
       Development on github:
-      <a href="http://github.com/blaa/HTML5-Presenter">http://github.com/blaa/HTML5-Presenter</a>
+      <a href="http://github.com/blaa/HTML5-Presenter">http://github.com/blaa/HTML5-Presenter</a><br/>
+      Support for MM:SS time added, titles in fancybox, some minor annoyances fixed.<br/>
     </div>
   </body>
 </html>
