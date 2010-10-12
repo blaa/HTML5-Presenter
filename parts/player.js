@@ -12,14 +12,24 @@ function get_title(idx) {
 function get_time(idx) {
     var raw = presData[idx][0];
     if (raw.search(':') == -1)
-        return parseFloat(raw);
+        return parseInt(raw);
     var spl = raw.split(':');
-    if (spl.length != 2 || parseFloat(spl[1]) > 60)
+    if (spl.length != 2 || parseInt(spl[1]) > 60)
         log('Invalid time specification for slide ' + idx);
 
-    var time = parseInt(spl[0]) * 60 + parseFloat(spl[1]);
+    var minutes = spl[0].replace(/^0*/, '');
+    if (minutes.length > 0)
+        minutes = parseInt(minutes);
+    else
+        minutes = 0;
 
-    return time;
+    var seconds = spl[1].replace(/^0*/, '');
+    if (seconds.length > 0)
+        seconds = parseInt(seconds);
+    else
+        seconds = 0;
+
+    return minutes * 60 + seconds;
 }
 
 function get_nice_time(idx) {
@@ -48,7 +58,6 @@ function loadFrame(index)
         $('#fancybox-title-main').html(title);
     }
 
-
     var info = $('#info');
 
     info.html('Slide ' + (parseInt(index)+1) + '/' + presData.length);
@@ -57,27 +66,27 @@ function loadFrame(index)
     $('#TOC li[rel=' + index + ']').addClass('current');
 }
 
-function updatePresentation() {
+function updatePresentation(manual) {
 
     var v = $('video');
     var t = v[0].currentTime;
 
     if (presData == null) {
         /* Ignore */
-        setTimeout('updatePresentation();', 1000);
+        setTimeout('updatePresentation(false);', 1000);
     }
 
     var newFrameIndex = null;
 
     for (idx in presData) {
-        if (!newFrameIndex) {
+        if (newFrameIndex == null) {
             newFrameIndex = idx;
             continue;
         }
 
         var frameTime = get_time(idx);
 
-        if (t > frameTime) {
+        if (t >= frameTime) {
             newFrameIndex = idx;
         } else
             break;
@@ -85,7 +94,8 @@ function updatePresentation() {
     
     loadFrame(newFrameIndex);
 
-    setTimeout('updatePresentation();', 1000);
+    if (manual != true)
+        setTimeout('updatePresentation(false);', 1000);
 }
 
 
@@ -126,7 +136,7 @@ $(document).ready(
                       var idx = $(this).attr('rel');
                       loadFrame(idx);
                       var v = $('video');
-                      v[0].currentTime = get_time(idx);
+                      v[0].currentTime = parseFloat(get_time(idx));
                   }
         );
 
@@ -146,10 +156,10 @@ $(document).ready(
 
         $('video').bind('seeked', 
                         function () {
-                            updatePresentation();
+                            updatePresentation(true);
                         }
                        );
 
-        setTimeout('updatePresentation();', 1000);
+        setTimeout('updatePresentation(false);', 1000);
     }
 );
