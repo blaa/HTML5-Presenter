@@ -69,7 +69,7 @@ function loadFrame(index)
 function updatePresentation(manual) {
 
     var v = $('video');
-    var t = v[0].currentTime;
+    var t = v[0].currentTime + 0.1;
 
     if (presData == null) {
         /* Ignore */
@@ -134,7 +134,7 @@ $(document).ready(
             .live('click', 
                   function () {
                       var idx = $(this).attr('rel');
-                      loadFrame(idx);
+                      //loadFrame(idx);
                       var v = $('video');
                       v[0].currentTime = parseFloat(get_time(idx));
                   }
