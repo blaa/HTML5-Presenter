@@ -5,10 +5,6 @@ function log(txt) {
     $('#log').append(txt + '<br/>');
 }
 
-function get_file(idx) {
-    return presData[idx][1][0];
-}
-
 function get_title(idx) {
     return presData[idx][1][1];
 }
@@ -30,8 +26,8 @@ function get_nice_time(idx) {
     return presData[idx][0] + 's';
 }
 
-function get_src(file) {
-    return 'prs/' + file;
+function get_src(idx) {
+    return 'prs/' + presData[idx][1][0];
 }
 
 function loadFrame(index) 
@@ -40,7 +36,7 @@ function loadFrame(index)
         return; /* Nothing to do */
     currentIndex = index;
 
-    var file = get_src(get_file(index));
+    var file = get_src(index);
     var title = get_title(index);
 
     $('#presentation img')
@@ -96,12 +92,20 @@ function updatePresentation() {
 function generateTOC() {
     var container = $('#TOC');
     for (idx in presData) {
-        var file = get_file(idx);
+        var file = get_src(idx);
         var time = get_time(idx);
+        var title = get_title(idx);        
+
+        var img = $('<img/>');
+        img
+            .attr('title', title)
+            .attr('alt', title)
+            .attr('src', file);
         
         var li = $('<li/>')
             .attr('rel', idx)
-            .html(get_title(idx) + ' (' + get_nice_time(idx) + ')');
+            .append(img)
+            .append(get_title(idx) + ' (' + get_nice_time(idx) + ')');
 
         container.append(li);
     }

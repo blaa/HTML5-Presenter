@@ -10,7 +10,6 @@
 #presentation {
     min-height: 350px;
     float: right;
-
 }
 
 #video {
@@ -39,9 +38,21 @@ h1 {
     cursor: pointer;
 }
 
+#TOC img {
+    max-width: 70px;
+    max-height: 70px;
+    margin: 3px;
+    vertical-align: middle;
+}
+
 #TOC li.current {
     color: red;
 }
+
+#TOC li.current img {
+    border: solid 1px red;
+}
+
 
 .clear {
     clear: both;

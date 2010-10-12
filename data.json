@@ -1,6 +1,13 @@
 [
-  ["0",     ["page1.jpg", "Tytul1"]],
-  ["2",     ["page2.jpg", "Tytul2"]], 
-  ["00:04", ["page3.jpg", "Tytul3"]],
-  ["00:08", ["page4.jpg", "Tytul4"]]
+  ["0",     ["slide1.png", "Introduction"]],
+  ["4",     ["slide2.png", "Flawed examples"]], 
+  ["00:08", ["slide3.png", "Invalid reasoning"]],
+  ["00:12", ["slide4.png", "Wrong conclusion"]],
+
+  ["00:13", ["slide5.png", "Irrelevant data charts"]],
+  ["00:14", ["slide6.png", "Wishful thinking"]],
+  ["00:18", ["slide7.png", "Marketing lies"]],
+  ["00:20", ["slide8.png", "Biased comparison"]],
+  ["00:30", ["slide9.png", "Long summary"]],
+  ["00:35", ["slide10.png", "Applause"]]
 ]
